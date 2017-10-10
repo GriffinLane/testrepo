@@ -1,0 +1,29 @@
+#---
+#title: "GoT_Data"
+#author: "Griffin J. Lane"
+#date: "September 23, 2017"
+#output: html_document
+#---
+
+#create a csv file in the current working directory
+file.create("GoT.csv")
+
+#save the URL to a variable to ease modification in the future
+myURL <- "https://raw.githubusercontent.com/Kevogich/Game-Of-Thrones/master/5kings_battles_v1.csv"
+
+#download the file from the URL to the file in the wd
+download.file( myURL, "GoT.csv", header = TRUE)
+
+#read the data from the file to a dataframe
+GoT <- read.csv("GoT.csv", )
+
+#return the dimensions of the df
+dim(GoT)
+
+#return the column
+colnames(GoT)
+
+#Clearly these data are in need of tidying as all are returned with type 'character'
+sapply(colnames(GoT), typeof)
+
+data.frame(Scores=c(a,b), Groups=rep(c("A","B"), times=c(length(a),length(b)))) 

@@ -1,0 +1,6 @@
+"0","##The readme mentioned that the sets were ""lazy loaded"""
+"0","df <- fivethirtyeight::college_recent_grads"
+"0","##Note that if counted by hand from the table received with:"
+"0","#    data(package = ""fivethirtyeight"")"
+"0","#the dataset is different from what is recommended however at: http://127.0.0.1:10387/library/fivethirtyeight/doc/fivethirtyeight.Rmd"
+"0","#That would return the comma survey dataset instead"

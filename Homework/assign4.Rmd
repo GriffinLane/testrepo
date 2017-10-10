@@ -1,0 +1,123 @@
+---
+title: "Assignment 4"
+author: "Griffin J. Lane"
+date: "October 10, 2017"
+output: html_document
+---
+
+##1.
+###a. Install the fivethirtyeight package.
+```{r, warning=FALSE}
+#if not insta
+#install.packages("fivethirtyeight")
+library(fivethirtyeight)
+```
+
+###b. In the listing of Data sets in package ‘fivethirtyeight,’ assign the eighteenth data set to an object ‘df.’
+```{r, message=FALSE}
+##This will give us website with a link to an R code snippet to get all the datasets
+##It is commented out in order for .rmd to compile
+#browseVignettes(package = "fivethirtyeight")  
+
+###It was possible to count to 18 but, this useful snippet was in the help docs for fivethirtyeight
+## ---- message=FALSE, warning=FALSE, echo=FALSE---------------------------
+library(fivethirtyeight)
+# tidyverse includes ggplot2, tibble, tidyr, readr, purrr, dplyr:
+library(tidyverse)
+library(knitr)
+
+datasets.538 <- read_csv("https://goo.gl/OT8iHa") %>% 
+  filter(!is.na(DATAFRAME_NAME)) %>% 
+  mutate(DATAFRAME_NAME = paste("`", DATAFRAME_NAME, "`", sep="")) %>% 
+  transmute(
+    `Data Frame Name` = DATAFRAME_NAME,
+    `Article Title` = ARTICLE_TITLE,
+    `Filed Under` = ARTICLE_FILED_UNDER,
+    `Author 1` = ARTICLE_AUTHOR_1,
+    `Author 2` = ARTICLE_AUTHOR_2,
+    `Author 3` = ARTICLE_AUTHOR_3,
+    Date = ARTICLE_DATE,
+    URL = ARTICLE_URL
+  ) %>% 
+  arrange(`Data Frame Name`)
+#kable(datasets)
+
+##NOTE: I AM USING 16, NOT 18, DUE TO THE TWO MISSING DATA SETS
+##US_births_2000_2014   and   US_births_1994_2003
+##From the csv URL provided on the github account
+##This gives us the name of the data frame
+df.name <- datasets.538[16,which(colnames(datasets.538)=="Data Frame Name")] 
+df.name#$`Data Frame Name` #uncomment the tail to get a plain string
+
+
+##The readme mentioned that the sets were "lazy loaded"
+df <- fivethirtyeight::college_recent_grads
+
+##Note that if counted by hand from the table received with:
+#    data(package = "fivethirtyeight")
+#the dataset is different from what is recommended however at: http://127.0.0.1:10387/library/fivethirtyeight/doc/fivethirtyeight.Rmd
+#That would return the comma survey dataset instead
+```
+
+
+###c. Use a more detailed list of the data sets to write out the URL in a comment to the related news story.
+```{r}
+#This is the URL related to the news story
+df.URL <- datasets.538[16,which(colnames(datasets.538)=="URL")] 
+df.URL
+
+##Or all can be browsed via:
+#vignette("fivethirtyeight", package = "fivethirtyeight")
+```
+
+###d. Using R command(s), give the dimensions and column names of this data frame.
+```{r}
+dim(df)
+colnames(df) #or just: names(df)
+```
+
+
+##2.
+###a. Write an R command that gives you the column names of the data frame. Right after that, write one that counts the number of columns but not rows. 
+```{r}
+GetNames <- function(dataFrame){
+  colnames(dataFrame)
+}
+
+GetNames(df)
+
+GetColumnCount <- function(dataFrame){
+  length(dataFrame) #no need to get fancy
+}
+
+GetColumnCount(df)
+```
+
+###b. Generate a count of each unique major_category in the data frame. I recommend using libraries to help. To be clear, this should look like a matrix or data frame containing the major_category and the frequency it occurs in the dataset. Assign it to major_count.
+```{r}
+#sets major_count to a sorted data frame with the major category and it's frequency
+major_count <- table(df$major_category) #I opted for a table instead of a data.frame
+##You could use this if you wanted a data.frame:
+#major_count <- data.frame(sort(table(df$major_category), decreasing = TRUE))
+#names(major_count) <- c("MajorCategory","Frequency")
+
+head(major_count, 10)
+```
+
+###c. To make things easier to read, put par(las=2) before your plot to make the text perpendicular to the axis. Make a barplot of major_count. Make sure to label the title with something informative (check the vignette if you need), label the x and y axis, and make it any color other than grey. Assign the major_category labels to their respective bar. Flip the barplot horizontally so that bars extend to the right, not upward. All of these options can be done in a single pass of barplot(). 
+```{r}
+par(las=2, ylab("DERPGASM"))
+barplot(major_count, xlab = "Frequency", ylab = "Category of Major",main = "Major Categories and Their Frequency", col = "magenta", horiz = TRUE, cex.names = .5)
+```
+
+###d. Write the fivethirtyeight data to a csv file. Make sure that it does not have row labels.
+```{r}
+write.csv2(df, "RecentCollegeGradData.csv", row.names = FALSE)
+```
+
+##3.
+###a. Start a new repository on GitHub for your SMU MSDS homework. On your local device, make sure there is a directory for Homework at the minimum; you are welcome to add whatever you would like to this repo in addition to your requirements here.
+```{}
+#Repository has been pushed and committed via CMD line
+```
+

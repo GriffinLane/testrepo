@@ -1,0 +1,59 @@
+##########
+##1
+#The log of a positive number.
+log(50)
+
+#The default base for the log function
+print("e = 2.718 281 828")
+
+#log with a different base.
+log(50,10)
+
+#log of a negative number. (explain the answer)
+log(-1) #returns NaN, Not a Number
+
+#Square-root of a positive number.
+sqrt(49)
+
+############
+##2
+#standard random normal vector of n=15
+vec <- rnorm(15)
+
+#its mean
+mean(vec)
+
+#its stdDev
+sd(vec)
+
+#random vector with a target mean and sd
+vec <- rnorm(15, mean =10, sd = 2)
+
+#should be close to 2
+sd(vec)
+
+#should be close to 10
+mean(vec) 
+
+## Note: They will not be exact but can be made more accurate with increased sample size. 15 is insufficient
+
+############
+##3
+
+#weights vector
+weights <- c(60, 72, 57, 90, 95, 72)
+
+#heights vector
+heights <- c(1.80, 1.85, 1.72, 1.90, 1.74, 1.91)
+
+#plot weight vs height
+plot(weights ~ heights)
+
+#calc BMI for each unit of sample
+BMI <- weights / heights**2
+
+#sample mean
+wgtMean <- mean(weights)
+
+#partially munged weights
+weights <- weights - wgtMean

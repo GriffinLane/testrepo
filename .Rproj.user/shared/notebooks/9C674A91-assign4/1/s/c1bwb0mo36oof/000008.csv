@@ -1,0 +1,3 @@
+"0","#This is the URL related to the news story"
+"0","df.URL <- datasets.538[16,which(colnames(datasets.538)==""URL"")] "
+"0","df.URL"
