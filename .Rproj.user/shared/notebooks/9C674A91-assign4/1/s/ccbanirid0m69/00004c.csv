@@ -1,2 +1,0 @@
-"0","par(las=2, ylab(""DERPGASM""))"
-"0","barplot(major_count, xlab = ""Frequency"", ylab = ""Category of Major"",main = ""Major Categories and Their Frequency"", col = ""magenta"", horiz = TRUE, cex.names = .5)"
