@@ -1,0 +1,2 @@
+"0","df <- read.csv2(""C:/Users/Griff/OneDrive/Documents/!_SKOOL/Doing Data Science/Datasets/yob2016.txt"", sep = "";"") #read.csv2 can handle .txt extensions"
+"0","names(df) <- c(""Name"", ""Sex"", ""NameCount"")"
